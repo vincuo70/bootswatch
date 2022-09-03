@@ -1,0 +1,70 @@
+// Terminal 0.0.1
+// Derived from https://github.com/panr/hugo-theme-terminal.git
+// Started from Solar
+
+// Variables
+$web-font-path: "https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&display=swap" !default;
+
+@if $web-font-path {
+  @import url($web-font-path);
+}
+
+// Buttons
+
+.btn {
+
+  @each $color,
+  $value in $theme-colors {
+    &-#{$color} {
+      @if $enable-gradients {
+        background: $value linear-gradient(180deg, mix($white, $value, 15%), $value) repeat-x;
+      }
+
+      @else {
+        background-color: $value;
+      }
+    }
+  }
+}
+
+// Indicators
+
+.alert {
+  color: $white;
+  border: none;
+
+  a,
+  .alert-link {
+    color: $white;
+    text-decoration: underline;
+  }
+
+  @each $color,
+  $value in $theme-colors {
+    &-#{$color} {
+      @if $enable-gradients {
+        background: $value linear-gradient(180deg, mix($white, $value, 15%), $value) repeat-x;
+      }
+
+      @else {
+        background-color: $value;
+      }
+    }
+  }
+
+  &-light {
+
+    &,
+    a:not(.btn),
+    .alert-link {
+      color: $body-bg;
+    }
+  }
+}
+
+
+.badge {
+  &.bg-light {
+    color: $dark;
+  }
+}

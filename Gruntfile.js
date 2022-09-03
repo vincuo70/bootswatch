@@ -27,6 +27,7 @@ const SWATCHES = [
   'solar',
   'spacelab',
   'superhero',
+  "terminal",
   'united',
   'vapor',
   'yeti',
@@ -38,7 +39,8 @@ const DIST_DIR = 'dist/';
 const DOCS_DEST = 'docs/5/';
 let buildTheme = '';
 
-module.exports = grunt => {
+module.exports = grunt =>
+{
   grunt.loadNpmTasks('@lodder/grunt-postcss');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-concat');
@@ -186,14 +188,16 @@ module.exports = grunt => {
     }
   });
 
-  grunt.registerTask('build', 'build a regular theme from scss', theme => {
+  grunt.registerTask('build', 'build a regular theme from scss', theme =>
+  {
     theme = theme ? theme : buildTheme;
 
     const themeDir = path.join(DIST_DIR, '/', theme);
     const isValidTheme = grunt.file.exists(path.join(themeDir, '/_variables.scss')) && grunt.file.exists(path.join(themeDir, '/_bootswatch.scss'));
 
     // cancel the build (without failing) if this directory is not a valid theme
-    if (!isValidTheme) {
+    if (!isValidTheme)
+    {
       grunt.log.writeln(`${theme} theme does not exist!`);
       return;
     }
@@ -212,7 +216,7 @@ module.exports = grunt => {
 */
       `;
 
-    grunt.config.set('concat.options', {banner});
+    grunt.config.set('concat.options', { banner });
     grunt.config.set('concat.dist', {
       src: concatSrc,
       dest: concatDest
@@ -242,16 +246,19 @@ module.exports = grunt => {
     ]);
   });
 
-  grunt.registerTask('swatch', 'build a theme from scss ', theme => {
+  grunt.registerTask('swatch', 'build a theme from scss ', theme =>
+  {
     // If no theme is passed, build all swatches
     theme = theme ? [theme] : SWATCHES;
 
-    theme.forEach(t => {
+    theme.forEach(t =>
+    {
       grunt.task.run(`build:${t}`);
     });
   });
 
-  grunt.event.on('watch', (action, filepath) => {
+  grunt.event.on('watch', (action, filepath) =>
+  {
     const theme = path.basename(path.dirname(filepath));
 
     grunt.log.writeln(`${theme} changed...`);
